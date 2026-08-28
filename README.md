@@ -70,10 +70,34 @@ A modern, YouTube-inspired video hosting and education platform UI designed for 
 
 ---
 
-## 🚀 How to Launch
+## 🚀 How to Launch & Configure Videos (Google Drive / GitHub)
 
-Simply open `index.html` in any modern web browser (Google Chrome, Microsoft Edge, Firefox, Safari) or serve it locally:
+### 1. Configure Video Links via `videos.json`:
+Because large video files cannot be uploaded directly to GitHub, you can host your videos on **Google Drive**, **Dropbox**, **Cloudinary**, or any CDN, and simply paste their links into [`videos.json`](file:///e:/I%20Am%20Here%20-%20Short%20Film/MeTube/Raw/videos.json):
 
+```json
+{
+  "mainVideo": {
+    "title": "Sign Language Class — Lesson 1: Learn 60 Sentences",
+    "videoUrl": "https://drive.google.com/file/d/YOUR_GOOGLE_DRIVE_FILE_ID/view?usp=sharing",
+    "poster": "assets/thumbnails/main_poster.jpg"
+  },
+  "playlist": [
+    {
+      "id": "lesson-1",
+      "title": "Lesson 1: The Language of Silence",
+      "videoUrl": "https://drive.google.com/file/d/YOUR_GOOGLE_DRIVE_FILE_ID/view?usp=sharing",
+      "timestamp": 0,
+      "thumbnail": "assets/thumbnails/thumb_lesson1.jpg"
+    }
+  ]
+}
+```
+
+> **Note on Google Drive Links**:
+> You can paste standard Google Drive sharing links directly (`https://drive.google.com/file/d/ID/view?usp=sharing`). Make sure the sharing permission is set to **"Anyone with the link can view"**. The app automatically formats it into a streaming URL!
+
+### 2. Launch Local Server:
 ```bash
 # Using python built-in server
 python -m http.server 8080

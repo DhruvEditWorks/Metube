@@ -1,0 +1,101 @@
+{
+  "mainVideo": {
+    "title": "Sign Language Class — Lesson 1: Learn 60 Sentences",
+    "videoUrl": "assets/videos/Sign Language Class.mp4",
+    "poster": "assets/thumbnails/main_poster.jpg",
+    "channel": "The Silent Classroom",
+    "subscribers": "3.1M subscribers",
+    "views": "1.2M views",
+    "uploadDate": "2 weeks ago",
+    "likes": "87K",
+    "commentsCount": "574",
+    "description": "Learn basic sign language sentences with our expert instructor. Perfect for beginners who want to communicate without words. Part of the 'I Am Here' film campaign."
+  },
+  "playlist": [
+    {
+      "id": "lesson-1",
+      "title": "Lesson 1: The Language of Silence",
+      "videoUrl": "assets/videos/Sign Language Class.mp4",
+      "timestamp": 0,
+      "duration": "00:00",
+      "thumbnail": "assets/thumbnails/thumb_lesson1.jpg",
+      "channel": "The Silent Classroom",
+      "views": "1.2M views",
+      "uploadDate": "2 weeks ago",
+      "likes": "87K",
+      "commentsCount": 574,
+      "description": "Learn basic sign language sentences with our expert instructor. Perfect for beginners who want to communicate without words. Part of the 'I Am Here' film campaign."
+    },
+    {
+      "id": "lesson-2",
+      "title": "Lesson 2: Greetings Without Sound",
+      "videoUrl": "assets/videos/Sign Language Class.mp4",
+      "timestamp": 25,
+      "duration": "00:25",
+      "thumbnail": "assets/thumbnails/thumb_lesson2.jpg",
+      "channel": "The Silent Classroom",
+      "views": "980K views",
+      "uploadDate": "12 days ago",
+      "likes": "74K",
+      "commentsCount": 430,
+      "description": "Master daily greetings, welcoming gestures, and morning/evening expressions in Indian Sign Language."
+    },
+    {
+      "id": "lesson-3",
+      "title": "Lesson 3: Family in Fingertips",
+      "videoUrl": "assets/videos/Sign Language Class.mp4",
+      "timestamp": 50,
+      "duration": "00:50",
+      "thumbnail": "assets/thumbnails/thumb_lesson3.jpg",
+      "channel": "The Silent Classroom",
+      "views": "876K views",
+      "uploadDate": "9 days ago",
+      "likes": "68K",
+      "commentsCount": 385,
+      "description": "Express family connections, relationships, and heartfelt bonds through gentle finger movements."
+    },
+    {
+      "id": "lesson-4",
+      "title": "Lesson 4: Emotions in Gestures",
+      "videoUrl": "assets/videos/Sign Language Class.mp4",
+      "timestamp": 75,
+      "duration": "01:15",
+      "thumbnail": "assets/thumbnails/thumb_lesson4.jpg",
+      "channel": "The Silent Classroom",
+      "views": "754K views",
+      "uploadDate": "6 days ago",
+      "likes": "61K",
+      "commentsCount": 312,
+      "description": "Discover how joy, warmth, comfort, and longing are conveyed through facial expressions and hand signs."
+    },
+    {
+      "id": "lesson-5",
+      "title": "Lesson 5: Daily Life in Signs",
+      "videoUrl": "assets/videos/Sign Language Class.mp4",
+      "timestamp": 100,
+      "duration": "01:40",
+      "thumbnail": "assets/thumbnails/thumb_lesson5.jpg",
+      "channel": "The Silent Classroom",
+      "views": "621K views",
+      "uploadDate": "4 days ago",
+      "likes": "52K",
+      "commentsCount": 280,
+      "description": "Common everyday activities, gratitude expressions, asking questions, and workplace communication."
+    },
+    {
+      "id": "lesson-6",
+      "title": "Lesson 6: Advanced Conversations",
+      "videoUrl": "assets/videos/Sign Language Class.mp4",
+      "timestamp": 120,
+      "duration": "02:00",
+      "thumbnail": "assets/thumbnails/thumb_lesson6.jpg",
+      "channel": "The Silent Classroom",
+      "views": "543K views",
+      "uploadDate": "1 day ago",
+      "likes": "48K",
+      "commentsCount": 240,
+      "description": "Fluency practice, storytelling without voice, poetry in motion, and building deep conversational links."
+    }
+  ]
+}
+

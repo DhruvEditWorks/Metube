@@ -506,9 +506,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ---------------- Video URL Helper (Supports Drive / Dropbox / CDN / Local) ----------------
+  const formatVideoUrl = (url) => {
+    if (!url) return '';
+    // Convert Google Drive sharing link into direct streamable/downloadable URL
+    if (url.includes('drive.google.com')) {
+      const fileIdMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (fileIdMatch && fileIdMatch[1]) {
+        return `https://drive.google.com/uc?export=download&id=${fileIdMatch[1]}`;
+      }
+    }
+    // Convert Dropbox link to direct link
+    if (url.includes('dropbox.com')) {
+      return url.replace('dl=0', 'raw=1');
+    }
+    return url;
+  };
+
   // ---------------- Playlist Switching & Chapter Seeking ----------------
   const loadLessonVideo = (card) => {
-    const videoUrl = card.dataset.video || 'assets/videos/Sign Language Class.mp4';
+    const rawVideoUrl = card.dataset.video || 'assets/videos/Sign Language Class.mp4';
+    const videoUrl = formatVideoUrl(rawVideoUrl);
     const timestamp = parseFloat(card.dataset.timestamp || '0');
     const title = card.dataset.title;
     const thumb = card.dataset.thumb;
@@ -556,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
     likeBtn.classList.remove('liked');
 
     // Update Active Card
-    playlistCards.forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.video-card').forEach(c => c.classList.remove('active'));
     card.classList.add('active');
 
     // Scroll to top of player smoothly
@@ -565,9 +583,84 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast(`Now playing: ${title} (${formatTime(timestamp)})`);
   };
 
-  playlistCards.forEach(card => {
+  document.querySelectorAll('.video-card').forEach(card => {
     card.addEventListener('click', () => loadLessonVideo(card));
   });
+
+  // ---------------- Fetch and Sync from videos.json ----------------
+  const initVideosFromJson = async () => {
+    try {
+      const res = await fetch('videos.json');
+      if (!res.ok) throw new Error(`Status: ${res.status}`);
+      const data = await res.json();
+
+      // Update Main Video
+      if (data.mainVideo) {
+        const streamUrl = formatVideoUrl(data.mainVideo.videoUrl);
+        if (streamUrl && streamUrl !== video.src) {
+          video.src = streamUrl;
+        }
+        if (data.mainVideo.poster) video.poster = data.mainVideo.poster;
+        if (data.mainVideo.title) mainVideoTitle.textContent = data.mainVideo.title;
+        if (data.mainVideo.views) videoViewsCount.textContent = data.mainVideo.views;
+        if (data.mainVideo.uploadDate) videoUploadDate.textContent = data.mainVideo.uploadDate;
+        if (data.mainVideo.likes) likeCountEl.textContent = data.mainVideo.likes;
+        if (data.mainVideo.commentsCount) commentsCountText.textContent = `${data.mainVideo.commentsCount} Comments`;
+        if (data.mainVideo.description) mainDescParagraph.textContent = data.mainVideo.description;
+      }
+
+      // Update Playlist Cards dynamically
+      if (Array.isArray(data.playlist) && data.playlist.length > 0) {
+        const playlistContainer = document.getElementById('playlistCardsList');
+        if (playlistContainer) {
+          playlistContainer.innerHTML = '';
+          data.playlist.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = `video-card ${index === 0 ? 'active' : ''}`;
+            card.dataset.lessonId = item.id || `lesson-${index + 1}`;
+            card.dataset.video = item.videoUrl || data.mainVideo?.videoUrl || '';
+            card.dataset.timestamp = item.timestamp !== undefined ? item.timestamp : (index * 25);
+            card.dataset.title = item.title;
+            card.dataset.thumb = item.thumbnail || `assets/thumbnails/thumb_lesson${index + 1}.jpg`;
+            card.dataset.views = item.views || '1.2M views';
+            card.dataset.date = item.uploadDate || '2 weeks ago';
+            card.dataset.likes = item.likes || '87K';
+            card.dataset.comments = item.commentsCount || 574;
+            card.dataset.desc = item.description || '';
+
+            card.innerHTML = `
+              <div class="card-thumb-wrap">
+                <img src="${escapeHtml(card.dataset.thumb)}" alt="${escapeHtml(item.title)}" class="card-thumbnail" onerror="this.src='assets/thumbnails/main_poster.jpg'">
+                <span class="card-timestamp">${escapeHtml(item.duration || formatTime(card.dataset.timestamp))}</span>
+                <div class="now-playing-badge">
+                  <span class="equalizer-bar"></span>
+                  <span class="equalizer-bar"></span>
+                  <span class="equalizer-bar"></span>
+                </div>
+              </div>
+              <div class="card-details">
+                <h4 class="card-title">${escapeHtml(item.title)}</h4>
+                <p class="card-channel">${escapeHtml(item.channel || 'The Silent Classroom')} <span class="verified-dot">✓</span></p>
+                <div class="card-meta">
+                  <span>${escapeHtml(item.views || '1.2M views')}</span>
+                  <span class="meta-bullet">•</span>
+                  <span>${escapeHtml(item.uploadDate || '2 weeks ago')}</span>
+                </div>
+              </div>
+            `;
+
+            card.addEventListener('click', () => loadLessonVideo(card));
+            playlistContainer.appendChild(card);
+          });
+        }
+      }
+      console.log('Videos successfully loaded and synced from videos.json');
+    } catch (e) {
+      console.info('Using local HTML fallback configuration for video player:', e);
+    }
+  };
+
+  initVideosFromJson();
 
   // Autoplay next video on end
   video.addEventListener('ended', () => {
