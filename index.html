@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeTube — Where silence finds its voice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%234FC3F7'/><stop offset='100%25' stop-color='%230288D1'/></linearGradient></defs><circle cx='18' cy='18' r='18' fill='url(%23g)'/><polygon points='14,10 26,18 14,26' fill='%23FFFFFF'/></svg>">
+</head>
+<body>
+
+  <!-- FIXED TOP HEADER -->
+  <header class="top-header" id="topHeader">
+    <div class="header-left">
+      <button class="icon-btn hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu" title="Main menu">
+        <svg class="nav-icon" viewBox="0 0 24 24" width="22" height="22">
+          <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <a href="#" class="brand-logo" id="brandLogo" title="MeTube — Where silence finds its voice">
+        <div class="logo-badge">
+          <svg viewBox="0 0 36 36" width="34" height="34">
+            <defs>
+              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4FC3F7"/>
+                <stop offset="100%" stop-color="#0288D1"/>
+              </linearGradient>
+            </defs>
+            <circle cx="18" cy="18" r="17" fill="url(#logoGrad)"/>
+            <polygon points="14,11 25,18 14,25" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <span class="logo-text">MeTube</span>
+      </a>
+    </div>
+
+    <div class="header-center">
+      <div class="search-bar-wrap">
+        <div class="search-input-box">
+          <input type="text" id="searchInput" placeholder="Search sign language lessons, gestures, expressions..." aria-label="Search">
+          <button class="clear-search-btn" id="clearSearchBtn" aria-label="Clear search" style="display: none;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+          </button>
+        </div>
+        <button class="search-submit-btn" id="searchSubmitBtn" aria-label="Submit search" title="Search">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="search-dropdown-results" id="searchDropdown" style="display: none;"></div>
+    </div>
+
+    <div class="header-right">
+      <!-- Short Film Badge Link -->
+      <a href="#campaign" class="film-campaign-pill" title="'I Am Here' Short Film Initiative">
+        <span class="heart-pulse">❤️</span>
+        <span class="pill-text">I Am Here</span>
+      </a>
+
+      <!-- Theme Toggle Button -->
+      <button class="icon-btn theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light/dark theme" title="Toggle theme (Light / Dark)">
+        <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Notifications -->
+      <button class="icon-btn notification-btn" id="notificationBtn" aria-label="Notifications" title="Notifications">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="notification-badge">3</span>
+      </button>
+
+      <!-- Profile Avatar -->
+      <div class="profile-avatar-wrap" id="profileMenuToggle" title="Reyansh — The Silent Room">
+        <div class="user-avatar-circle">
+          <span>R</span>
+          <div class="online-indicator"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION BAR (Below Header) -->
+  <nav class="sub-nav-bar" id="subNavBar">
+    <div class="nav-tabs-container">
+      <button class="nav-tab active" data-tab="home">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+        <span>Home</span>
+        <div class="tab-indicator"></div>
+      </button>
+      <button class="nav-tab" data-tab="trending">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M17.55 11.2c-.23-.34-.48-.65-.76-.94-.06-.06-.11-.12-.17-.17C15.82 9.25 15 7.73 15 6c0-.44.05-.87.15-1.28.07-.3.02-.62-.15-.88-.17-.25-.44-.41-.75-.44-.31-.02-.62.09-.85.31C11.96 5.09 11 7.23 11 9.5c0 .35.04.69.1 1.03.06.31-.04.63-.26.85-.22.22-.53.32-.84.26-.41-.08-.82-.14-1.25-.14-2.21 0-4 1.79-4 4 0 2.21 1.79 4 4 4 2.8 0 5.17-1.92 5.82-4.55.08-.32.32-.57.64-.64.32-.07.65.04.87.28.94 1.05 2.4 2.91 1.47 5.41-.15.41.05.86.44 1.04.14.07.29.1.44.1.28 0 .56-.12.75-.35 1.58-1.91 1.94-4.63.76-6.89z"/>
+        </svg>
+        <span>Trending</span>
+        <div class="tab-indicator"></div>
+      </button>
+      <button class="nav-tab" data-tab="subscriptions">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M20 8H4V6h16v2zm-2-6H6v2h12V2zm4 10v8c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2v-8c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2zm-6 4l-6-3.27v6.53L16 16z"/>
+        </svg>
+        <span>Subscriptions</span>
+        <div class="tab-indicator"></div>
+      </button>
+      <button class="nav-tab" data-tab="library">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z"/>
+        </svg>
+        <span>Library</span>
+        <div class="tab-indicator"></div>
+      </button>
+      <button class="nav-tab" data-tab="liked">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span>Liked</span>
+        <div class="tab-indicator"></div>
+      </button>
+      <button class="nav-tab" data-tab="settings">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+        </svg>
+        <span>Settings</span>
+        <div class="tab-indicator"></div>
+      </button>
+    </div>
+
+    <!-- Category filter chips -->
+    <div class="filter-chips-row">
+      <button class="chip active" data-filter="all">All Lessons</button>
+      <button class="chip" data-filter="beginner">Beginner Level</button>
+      <button class="chip" data-filter="sentences">60 Sentences Series</button>
+      <button class="chip" data-filter="emotions">Emotions & Gestures</button>
+      <button class="chip" data-filter="film">"I Am Here" Official</button>
+      <button class="chip" data-filter="alphabet">Fingerspelling & Basics</button>
+    </div>
+  </nav>
+
+  <!-- COLLAPSIBLE SIDEBAR (Left Drawer) -->
+  <aside class="sidebar-drawer" id="sidebarDrawer" aria-label="Main navigation drawer">
+    <div class="sidebar-top">
+      <div class="sidebar-brand">
+        <div class="logo-badge">
+          <svg viewBox="0 0 36 36" width="30" height="30">
+            <circle cx="18" cy="18" r="17" fill="url(#logoGrad)"/>
+            <polygon points="14,11 25,18 14,25" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <span class="sidebar-logo-text">MeTube</span>
+      </div>
+      <button class="icon-btn sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close sidebar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="sidebar-content">
+      <section class="sidebar-section">
+        <h4 class="sidebar-section-title">Menu</h4>
+        <ul class="sidebar-nav-list">
+          <li class="active"><a href="#"><span class="side-icon">🏠</span> <span class="side-label">Home</span></a></li>
+          <li><a href="#"><span class="side-icon">🔥</span> <span class="side-label">Trending</span> <span class="badge-new">New</span></a></li>
+          <li><a href="#"><span class="side-icon">📺</span> <span class="side-label">Subscriptions</span></a></li>
+          <li><a href="#"><span class="side-icon">📚</span> <span class="side-label">Library</span></a></li>
+          <li><a href="#"><span class="side-icon">❤️</span> <span class="side-label">Liked Videos</span></a></li>
+          <li><a href="#"><span class="side-icon">⚙️</span> <span class="side-label">Settings</span></a></li>
+        </ul>
+      </section>
+
+      <hr class="sidebar-divider">
+
+      <section class="sidebar-section">
+        <h4 class="sidebar-section-title">Subscriptions</h4>
+        <ul class="sidebar-channels-list" id="sidebarChannelsList">
+          <li class="channel-item active">
+            <div class="channel-avatar circle-av-main">SC</div>
+            <div class="channel-info">
+              <span class="channel-name">The Silent Classroom</span>
+              <span class="channel-subs">3.1M subscribers</span>
+            </div>
+            <span class="live-dot" title="Active live stream / new upload"></span>
+          </li>
+          <li class="channel-item">
+            <div class="channel-avatar circle-av-1">WU</div>
+            <div class="channel-info">
+              <span class="channel-name">Words Unspoken</span>
+              <span class="channel-subs">2.8M subscribers</span>
+            </div>
+            <span class="live-dot"></span>
+          </li>
+          <li class="channel-item">
+            <div class="channel-avatar circle-av-2">BS</div>
+            <div class="channel-info">
+              <span class="channel-name">Beyond Silence</span>
+              <span class="channel-subs">2.2M subscribers</span>
+            </div>
+          </li>
+          <li class="channel-item">
+            <div class="channel-avatar circle-av-3">GG</div>
+            <div class="channel-info">
+              <span class="channel-name">Gestures & Grace</span>
+              <span class="channel-subs">1.9M subscribers</span>
+            </div>
+            <span class="live-dot"></span>
+          </li>
+          <li class="channel-item">
+            <div class="channel-avatar circle-av-4">DC</div>
+            <div class="channel-info">
+              <span class="channel-name">The Deaf Collective</span>
+              <span class="channel-subs">1.6M subscribers</span>
+            </div>
+          </li>
+          <li class="channel-item">
+            <div class="channel-avatar circle-av-5">EH</div>
+            <div class="channel-info">
+              <span class="channel-name">Echoes of Hope</span>
+              <span class="channel-subs">1.3M subscribers</span>
+            </div>
+          </li>
+          <li class="channel-item">
+            <div class="channel-avatar circle-av-6">HY</div>
+            <div class="channel-info">
+              <span class="channel-name">Hear With Your Eyes</span>
+              <span class="channel-subs">1.1M subscribers</span>
+            </div>
+          </li>
+          <li class="channel-item">
+            <div class="channel-avatar circle-av-7">SV</div>
+            <div class="channel-info">
+              <span class="channel-name">Silent Voices Academy</span>
+              <span class="channel-subs">980K subscribers</span>
+            </div>
+          </li>
+          <li class="channel-item">
+            <div class="channel-avatar circle-av-8">UO</div>
+            <div class="channel-info">
+              <span class="channel-name">The Unheard Orchestra</span>
+              <span class="channel-subs">876K subscribers</span>
+            </div>
+          </li>
+          <li class="channel-item">
+            <div class="channel-avatar circle-av-9">FS</div>
+            <div class="channel-info">
+              <span class="channel-name">Fingers That Speak</span>
+              <span class="channel-subs">754K subscribers</span>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <hr class="sidebar-divider">
+
+      <section class="sidebar-section campaign-box">
+        <div class="campaign-card">
+          <div class="campaign-icon">✨</div>
+          <h5>"I Am Here" Campaign</h5>
+          <p>Dedicated to bridging sound and silence through empathetic learning and storytelling.</p>
+        </div>
+      </section>
+
+      <div class="sidebar-footer">
+        <div class="mini-metube-logo">
+          <svg viewBox="0 0 36 36" width="22" height="22">
+            <circle cx="18" cy="18" r="17" fill="url(#logoGrad)"/>
+            <polygon points="14,11 25,18 14,25" fill="#FFFFFF"/>
+          </svg>
+          <span><strong>MeTube</strong> • 2026</span>
+        </div>
+        <p class="tagline-text">"Where silence finds its voice"</p>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- MAIN TWO-COLUMN CONTENT AREA -->
+  <main class="main-layout-wrapper" id="mainContent">
+    <div class="layout-container">
+      
+      <!-- ==================== LEFT COLUMN (70% WIDTH) ==================== -->
+      <section class="left-column">
+        
+        <!-- VIDEO PLAYER CONTAINER (16:9 Aspect Ratio) -->
+        <div class="video-player-container" id="playerContainer">
+          <video 
+            id="mainVideo" 
+            poster="assets/thumbnails/main_poster.jpg"
+            preload="metadata"
+            playsinline
+            aria-label="MeTube Video Player">
+            <source id="videoSource" src="assets/videos/Sign Language Class.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <!-- Big Center Play Button Overlay -->
+          <div class="center-play-overlay" id="centerPlayBtn" title="Play video">
+            <div class="center-play-ripple">
+              <svg viewBox="0 0 36 36" width="48" height="48">
+                <polygon points="13,9 27,18 13,27" fill="#FFFFFF"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Video Loading Spinner -->
+          <div class="video-spinner" id="videoSpinner" style="display: none;">
+            <div class="spinner-ring"></div>
+          </div>
+
+          <!-- Captions / Subtitle Display -->
+          <div class="captions-overlay" id="captionsOverlay">
+            <span class="caption-bubble" id="captionText">Sign Language: "I Am Here — Learn 60 Sentences"</span>
+          </div>
+
+          <!-- Quick Feedback Overlay (e.g. +10s, Volume, Speed) -->
+          <div class="quick-feedback" id="quickFeedback" style="opacity: 0;">
+            <span id="quickFeedbackText">10s ▶▶</span>
+          </div>
+
+          <!-- CUSTOM PLAYER CONTROLS OVERLAY -->
+          <div class="player-controls-overlay" id="playerControls">
+            
+            <!-- Progress Bar / Scrubber -->
+            <div class="scrubber-bar-wrap" id="scrubberWrap" tabindex="0" role="slider" aria-label="Video seek progress">
+              <div class="scrubber-track">
+                <div class="scrubber-buffer" id="bufferProgress"></div>
+                <div class="scrubber-fill" id="seekProgress"></div>
+                <div class="scrubber-thumb" id="scrubberThumb"></div>
+              </div>
+              <div class="scrubber-tooltip" id="scrubberTooltip">00:00</div>
+            </div>
+
+            <!-- Controls Bottom Row -->
+            <div class="controls-bottom-row">
+              <!-- Left controls -->
+              <div class="controls-left">
+                <!-- Play / Pause -->
+                <button class="ctrl-btn play-pause-btn" id="playPauseBtn" title="Play (k / space)" aria-label="Play">
+                  <svg class="play-svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <svg class="pause-svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                  </svg>
+                </button>
+
+                <!-- Skip 10s Backward -->
+                <button class="ctrl-btn skip-btn" id="skipBackBtn" title="Skip back 10s (j)" aria-label="Skip back 10 seconds">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M12.5 8c-2.65 0-5.05 1-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.2 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/>
+                  </svg>
+                  <span class="skip-label">10</span>
+                </button>
+
+                <!-- Skip 10s Forward -->
+                <button class="ctrl-btn skip-btn" id="skipForwardBtn" title="Skip forward 10s (l)" aria-label="Skip forward 10 seconds">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M11.5 8c2.65 0 5.05 1 6.9 2.6L22 7v9h-9l3.62-3.62c-1.39-1.2-3.16-1.88-5.12-1.88-3.54 0-6.55 2.31-7.6 5.5l-2.37-.78C2.92 11.03 6.85 8 11.5 8z"/>
+                  </svg>
+                  <span class="skip-label">10</span>
+                </button>
+
+                <!-- Volume & Mute -->
+                <div class="volume-control-wrap">
+                  <button class="ctrl-btn volume-btn" id="volumeBtn" title="Mute (m)" aria-label="Mute">
+                    <svg class="vol-high" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                    <svg class="vol-mute" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
+                      <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                    </svg>
+                  </button>
+                  <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="1" aria-label="Volume">
+                </div>
+
+                <!-- Timer / Duration -->
+                <div class="time-display">
+                  <span id="currentTime">00:00</span>
+                  <span class="time-separator">/</span>
+                  <span id="durationTime">00:00</span>
+                </div>
+              </div>
+
+              <!-- Right controls -->
+              <div class="controls-right">
+                <!-- Subtitles / Captions Toggle -->
+                <button class="ctrl-btn cc-btn active" id="ccToggleBtn" title="Subtitles/CC (c)" aria-label="Closed captions">
+                  <span class="cc-badge">CC</span>
+                </button>
+
+                <!-- Speed Control Button -->
+                <div class="speed-menu-wrap">
+                  <button class="ctrl-btn speed-btn" id="speedMenuBtn" title="Playback speed" aria-label="Playback speed">
+                    <span id="currentSpeedText">1x</span>
+                  </button>
+                  <div class="speed-dropdown" id="speedDropdown" style="display: none;">
+                    <div class="dropdown-item" data-speed="0.5">0.5x</div>
+                    <div class="dropdown-item" data-speed="0.75">0.75x</div>
+                    <div class="dropdown-item active" data-speed="1">1.0x (Normal)</div>
+                    <div class="dropdown-item" data-speed="1.25">1.25x</div>
+                    <div class="dropdown-item" data-speed="1.5">1.5x</div>
+                    <div class="dropdown-item" data-speed="2">2.0x</div>
+                  </div>
+                </div>
+
+                <!-- Fullscreen Toggle -->
+                <button class="ctrl-btn fullscreen-btn" id="fullscreenBtn" title="Fullscreen (f)" aria-label="Toggle fullscreen">
+                  <svg class="fs-enter" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                  </svg>
+                  <svg class="fs-exit" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display: none;">
+                    <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIDEO DETAILS & METADATA SECTION -->
+        <div class="video-info-section">
+          <!-- Video Title -->
+          <h1 class="video-title" id="mainVideoTitle">
+            Sign Language Class — Lesson 1: Learn 60 Sentences
+          </h1>
+
+          <!-- Channel Bar & Action Buttons -->
+          <div class="channel-actions-row">
+            <!-- Channel Info -->
+            <div class="channel-meta-wrap">
+              <img src="assets/avatars/instructor.jpeg" alt="The Silent Classroom Avatar" class="channel-dp" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 40 40\'><rect width=\'40\' height=\'40\' fill=\'%230288D1\'/><text x=\'50%25\' y=\'55%25\' font-size=\'18\' fill=\'white\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-weight=\'bold\'>SC</text></svg>'">
+              <div class="channel-titles">
+                <div class="channel-name-row">
+                  <span class="channel-title" id="channelName">The Silent Classroom</span>
+                  <span class="verified-badge" title="Verified Educational Creator">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="#FFD700">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </span>
+                </div>
+                <span class="subscriber-count" id="subscriberCount">3.1M subscribers</span>
+              </div>
+
+              <!-- Subscribe Button -->
+              <button class="btn subscribe-btn" id="subscribeBtn">
+                <span class="sub-icon">🔔</span>
+                <span class="sub-text">Subscribe</span>
+              </button>
+            </div>
+
+            <!-- Action Buttons Row -->
+            <div class="actions-group">
+              <!-- Like / Dislike Combined Pill -->
+              <div class="like-dislike-pill">
+                <button class="action-btn like-btn" id="likeBtn" title="Like this video">
+                  <span class="heart-icon-svg" id="heartIcon">❤️</span>
+                  <span class="action-count" id="likeCount">87K</span>
+                </button>
+                <div class="action-divider"></div>
+                <button class="action-btn dislike-btn" id="dislikeBtn" title="Dislike this video">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.58-6.59c.37-.36.59-.86.59-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Share Button -->
+              <button class="action-btn standard-action-btn" id="shareBtn" title="Share video">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                </svg>
+                <span>Share</span>
+              </button>
+
+              <!-- Download Button -->
+              <button class="action-btn standard-action-btn" id="downloadBtn" title="Download for offline study">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+                </svg>
+                <span>Download</span>
+              </button>
+
+              <!-- Save Button -->
+              <button class="action-btn standard-action-btn" id="saveBtn" title="Save to playlist">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/>
+                </svg>
+                <span id="saveBtnText">Save</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- DESCRIPTION BOX (Expandable) -->
+          <div class="description-card" id="descCard">
+            <div class="desc-stats-line">
+              <span class="stats-views" id="videoViewsCount">1.2M views</span>
+              <span class="stats-dot">•</span>
+              <span class="stats-date" id="videoUploadDate">2 weeks ago</span>
+              <span class="stats-tags">#SignLanguage #IAmHere #TheSilentClassroom #ISL</span>
+            </div>
+            
+            <div class="desc-body-text" id="descText">
+              <p id="mainDescParagraph">
+                Learn basic sign language sentences with our expert instructor. Perfect for beginners who want to communicate without words. Part of the <strong>"I Am Here"</strong> film campaign.
+              </p>
+              
+              <div class="desc-expanded-content" id="descExpandedContent">
+                <hr class="desc-inner-divider">
+                <h4 class="chapters-heading">📖 Lesson Chapters & Timestamps</h4>
+                <ul class="timestamp-list">
+                  <li><a href="#" class="ts-link" data-seek="0">00:00</a> — Introduction to Silence & Expression</li>
+                  <li><a href="#" class="ts-link" data-seek="15">00:15</a> — Warm-up Gestures & Hand Shapes</li>
+                  <li><a href="#" class="ts-link" data-seek="30">00:30</a> — Lesson Key Concept: "I Am Here" (Main Gesture)</li>
+                  <li><a href="#" class="ts-link" data-seek="45">00:45</a> — 60 Everyday Sentences Breakdown</li>
+                  <li><a href="#" class="ts-link" data-seek="60">01:00</a> — Conversation Practice & Review</li>
+                </ul>
+
+                <h4 class="film-note-heading">🎬 About the Film "I Am Here"</h4>
+                <p class="film-note-text">
+                  In a world overflowing with noise, two souls discover that silence speaks the truest truth. Follow Reyansh and Amaira's journey as they find resonance without uttering a single spoken word. Every lesson in this series empowers you to communicate with empathy and depth.
+                </p>
+
+                <div class="film-credits">
+                  <span><strong>Presented by:</strong> The Silent Classroom in association with "I Am Here" Short Film</span><br>
+                  <span><strong>Instructor:</strong> Amaira & Certified Sign Language Educators</span>
+                </div>
+              </div>
+            </div>
+
+            <button class="desc-toggle-btn" id="descToggleBtn">Show more</button>
+          </div>
+
+          <!-- COMMENTS SECTION -->
+          <section class="comments-section" id="commentsSection">
+            <!-- Header -->
+            <div class="comments-header">
+              <div class="comments-count-row">
+                <h3 class="comments-count-title">
+                  <span class="comments-icon">💬</span>
+                  <span id="commentsCountText">574 Comments</span>
+                </h3>
+              </div>
+              <div class="comments-sort-wrap">
+                <label for="commentSortSelect" class="sort-label">Sort by:</label>
+                <select id="commentSortSelect" class="comment-sort-dropdown">
+                  <option value="top">Top comments</option>
+                  <option value="newest">Newest first</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Comment Input Box -->
+            <div class="add-comment-box">
+              <div class="commenter-avatar circle-av-user">
+                <span>R</span>
+              </div>
+              <div class="comment-input-area">
+                <textarea id="newCommentInput" placeholder="Add a comment as Reyansh..." rows="1"></textarea>
+                <div class="comment-actions-bar" id="commentActionsBar" style="display: none;">
+                  <button class="btn btn-text" id="cancelCommentBtn">Cancel</button>
+                  <button class="btn btn-primary" id="postCommentBtn" disabled>Comment</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comment List -->
+            <div class="comment-list-container" id="commentList">
+              <!-- Dynamically populated from JS with all 50+ poetic comments -->
+            </div>
+
+            <!-- Show More Comments Button -->
+            <div class="load-more-comments-wrap">
+              <button class="btn btn-outline load-more-comments-btn" id="loadMoreCommentsBtn">
+                View all 574 comments
+              </button>
+            </div>
+          </section>
+
+        </div>
+      </section>
+
+      <!-- ==================== RIGHT COLUMN (30% WIDTH) ==================== -->
+      <aside class="right-column">
+        
+        <!-- Up Next Playlist Header -->
+        <div class="playlist-header-card">
+          <div class="playlist-title-row">
+            <div class="playlist-title-wrap">
+              <h2 class="playlist-main-title">Up Next</h2>
+              <span class="playlist-series-badge">60 Sentences Course</span>
+            </div>
+            <div class="autoplay-toggle-wrap">
+              <span class="autoplay-label">Autoplay</span>
+              <label class="switch" title="Toggle Autoplay">
+                <input type="checkbox" id="autoplayToggle" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+          <p class="playlist-subtext">The Silent Classroom • Complete Sign Language Track</p>
+        </div>
+
+        <!-- 6 Video Cards Playlist (Sample Stock Thumbnails from assets/thumbnails/ - Easily replaceable!) -->
+        <div class="playlist-cards-list" id="playlistCardsList">
+          
+          <!-- Card 1: Active -->
+          <div class="video-card active" data-lesson-id="lesson-1" data-video="assets/videos/Sign Language Class.mp4" data-timestamp="0" data-title="Sign Language Class — Lesson 1: Learn 60 Sentences" data-thumb="assets/thumbnails/thumb_lesson1.jpg" data-views="1.2M views" data-date="2 weeks ago" data-likes="87K" data-comments="574" data-desc="Learn basic sign language sentences with our expert instructor. Perfect for beginners who want to communicate without words. Part of the 'I Am Here' film campaign.">
+            <div class="card-thumb-wrap">
+              <img src="assets/thumbnails/thumb_lesson1.jpg" alt="Lesson 1 Thumbnail" class="card-thumbnail" onerror="this.src='assets/thumbnails/main_poster.jpg'">
+              <span class="card-timestamp">00:00</span>
+              <div class="now-playing-badge">
+                <span class="equalizer-bar"></span>
+                <span class="equalizer-bar"></span>
+                <span class="equalizer-bar"></span>
+              </div>
+            </div>
+            <div class="card-details">
+              <h4 class="card-title">Lesson 1: The Language of Silence</h4>
+              <p class="card-channel">The Silent Classroom <span class="verified-dot">✓</span></p>
+              <div class="card-meta">
+                <span>1.2M views</span>
+                <span class="meta-bullet">•</span>
+                <span>2 weeks ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="video-card" data-lesson-id="lesson-2" data-video="assets/videos/Sign Language Class.mp4" data-timestamp="25" data-title="Sign Language Class — Lesson 2: Greetings Without Sound" data-thumb="assets/thumbnails/thumb_lesson2.jpg" data-views="980K views" data-date="12 days ago" data-likes="74K" data-comments="430" data-desc="Master daily greetings, welcoming gestures, and morning/evening expressions in Indian Sign Language.">
+            <div class="card-thumb-wrap">
+              <img src="assets/thumbnails/thumb_lesson2.jpg" alt="Lesson 2 Thumbnail" class="card-thumbnail" onerror="this.src='assets/thumbnails/main_poster.jpg'">
+              <span class="card-timestamp">00:25</span>
+            </div>
+            <div class="card-details">
+              <h4 class="card-title">Lesson 2: Greetings Without Sound</h4>
+              <p class="card-channel">The Silent Classroom <span class="verified-dot">✓</span></p>
+              <div class="card-meta">
+                <span>980K views</span>
+                <span class="meta-bullet">•</span>
+                <span>12 days ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="video-card" data-lesson-id="lesson-3" data-video="assets/videos/Sign Language Class.mp4" data-timestamp="50" data-title="Sign Language Class — Lesson 3: Family in Fingertips" data-thumb="assets/thumbnails/thumb_lesson3.jpg" data-views="876K views" data-date="9 days ago" data-likes="68K" data-comments="385" data-desc="Express family connections, relationships, and heartfelt bonds through gentle finger movements.">
+            <div class="card-thumb-wrap">
+              <img src="assets/thumbnails/thumb_lesson3.jpg" alt="Lesson 3 Thumbnail" class="card-thumbnail" onerror="this.src='assets/thumbnails/main_poster.jpg'">
+              <span class="card-timestamp">00:50</span>
+            </div>
+            <div class="card-details">
+              <h4 class="card-title">Lesson 3: Family in Fingertips</h4>
+              <p class="card-channel">The Silent Classroom <span class="verified-dot">✓</span></p>
+              <div class="card-meta">
+                <span>876K views</span>
+                <span class="meta-bullet">•</span>
+                <span>9 days ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="video-card" data-lesson-id="lesson-4" data-video="assets/videos/Sign Language Class.mp4" data-timestamp="75" data-title="Sign Language Class — Lesson 4: Emotions in Gestures" data-thumb="assets/thumbnails/thumb_lesson4.jpg" data-views="754K views" data-date="6 days ago" data-likes="61K" data-comments="312" data-desc="Discover how joy, warmth, comfort, and longing are conveyed through facial expressions and hand signs.">
+            <div class="card-thumb-wrap">
+              <img src="assets/thumbnails/thumb_lesson4.jpg" alt="Lesson 4 Thumbnail" class="card-thumbnail" onerror="this.src='assets/thumbnails/main_poster.jpg'">
+              <span class="card-timestamp">01:15</span>
+            </div>
+            <div class="card-details">
+              <h4 class="card-title">Lesson 4: Emotions in Gestures</h4>
+              <p class="card-channel">The Silent Classroom <span class="verified-dot">✓</span></p>
+              <div class="card-meta">
+                <span>754K views</span>
+                <span class="meta-bullet">•</span>
+                <span>6 days ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="video-card" data-lesson-id="lesson-5" data-video="assets/videos/Sign Language Class.mp4" data-timestamp="100" data-title="Sign Language Class — Lesson 5: Daily Life in Signs" data-thumb="assets/thumbnails/thumb_lesson5.jpg" data-views="621K views" data-date="4 days ago" data-likes="52K" data-comments="280" data-desc="Common everyday activities, gratitude expressions, asking questions, and workplace communication.">
+            <div class="card-thumb-wrap">
+              <img src="assets/thumbnails/thumb_lesson5.jpg" alt="Lesson 5 Thumbnail" class="card-thumbnail" onerror="this.src='assets/thumbnails/main_poster.jpg'">
+              <span class="card-timestamp">01:40</span>
+            </div>
+            <div class="card-details">
+              <h4 class="card-title">Lesson 5: Daily Life in Signs</h4>
+              <p class="card-channel">The Silent Classroom <span class="verified-dot">✓</span></p>
+              <div class="card-meta">
+                <span>621K views</span>
+                <span class="meta-bullet">•</span>
+                <span>4 days ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="video-card" data-lesson-id="lesson-6" data-video="assets/videos/Sign Language Class.mp4" data-timestamp="120" data-title="Sign Language Class — Lesson 6: Advanced Conversations" data-thumb="assets/thumbnails/thumb_lesson6.jpg" data-views="543K views" data-date="1 day ago" data-likes="48K" data-comments="240" data-desc="Fluency practice, storytelling without voice, poetry in motion, and building deep conversational links.">
+            <div class="card-thumb-wrap">
+              <img src="assets/thumbnails/thumb_lesson6.jpg" alt="Lesson 6 Thumbnail" class="card-thumbnail" onerror="this.src='assets/thumbnails/main_poster.jpg'">
+              <span class="card-timestamp">02:00</span>
+            </div>
+            <div class="card-details">
+              <h4 class="card-title">Lesson 6: Advanced Conversations</h4>
+              <p class="card-channel">The Silent Classroom <span class="verified-dot">✓</span></p>
+              <div class="card-meta">
+                <span>543K views</span>
+                <span class="meta-bullet">•</span>
+                <span>1 day ago</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Featured Thematic Creators Widget -->
+        <div class="featured-creators-card">
+          <h3 class="widget-title">Featured Sign Creators</h3>
+          <ul class="creator-mini-list">
+            <li class="creator-mini-item">
+              <div class="creator-av-badge circle-av-1">WU</div>
+              <div class="creator-details">
+                <span class="creator-name">Words Unspoken</span>
+                <span class="creator-sub-count">2.8M subscribers</span>
+              </div>
+              <button class="btn btn-sm btn-outline subscribe-toggle-btn">Subscribe</button>
+            </li>
+            <li class="creator-mini-item">
+              <div class="creator-av-badge circle-av-2">BS</div>
+              <div class="creator-details">
+                <span class="creator-name">Beyond Silence</span>
+                <span class="creator-sub-count">2.2M subscribers</span>
+              </div>
+              <button class="btn btn-sm btn-outline subscribe-toggle-btn">Subscribe</button>
+            </li>
+            <li class="creator-mini-item">
+              <div class="creator-av-badge circle-av-3">GG</div>
+              <div class="creator-details">
+                <span class="creator-name">Gestures & Grace</span>
+                <span class="creator-sub-count">1.9M subscribers</span>
+              </div>
+              <button class="btn btn-sm btn-outline subscribe-toggle-btn">Subscribe</button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Community Callout Card -->
+        <div class="community-banner-card" id="campaign">
+          <div class="banner-top-accent"></div>
+          <h4>"Where silence finds its voice"</h4>
+          <p>Join over 3 million learners discovering the poetic beauty of sign language through the 'I Am Here' movement.</p>
+          <button class="btn btn-primary btn-block" id="joinCommunityBtn">Join Silent Learning Circle</button>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- MOBILE BOTTOM NAVIGATION (Shown on Mobile screens <768px) -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav">
+    <button class="mob-nav-btn active" data-tab="home">
+      <span class="mob-icon">🏠</span>
+      <span class="mob-text">Home</span>
+    </button>
+    <button class="mob-nav-btn" data-tab="trending">
+      <span class="mob-icon">🔥</span>
+      <span class="mob-text">Trending</span>
+    </button>
+    <button class="mob-nav-btn" data-tab="subscriptions">
+      <span class="mob-icon">📺</span>
+      <span class="mob-text">Subs</span>
+    </button>
+    <button class="mob-nav-btn" data-tab="library">
+      <span class="mob-icon">📚</span>
+      <span class="mob-text">Library</span>
+    </button>
+    <button class="mob-nav-btn" data-tab="liked">
+      <span class="mob-icon">❤️</span>
+      <span class="mob-text">Liked</span>
+    </button>
+  </nav>
+
+  <!-- SHARE MODAL DIALOG -->
+  <div class="modal-overlay" id="shareModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Share this lesson</h3>
+        <button class="modal-close-btn" id="closeShareModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Share sign language education with friends & family:</p>
+        <div class="share-social-grid">
+          <button class="share-icon-btn whatsapp-share" title="Share on WhatsApp">
+            <span class="soc-icon">💬</span>
+            <span>WhatsApp</span>
+          </button>
+          <button class="share-icon-btn twitter-share" title="Share on X / Twitter">
+            <span class="soc-icon">🐦</span>
+            <span>X (Twitter)</span>
+          </button>
+          <button class="share-icon-btn facebook-share" title="Share on Facebook">
+            <span class="soc-icon">📘</span>
+            <span>Facebook</span>
+          </button>
+          <button class="share-icon-btn email-share" title="Share via Email">
+            <span class="soc-icon">✉️</span>
+            <span>Email</span>
+          </button>
+        </div>
+        <div class="copy-link-group">
+          <input type="text" id="shareLinkInput" value="https://metube.silence/lesson1?ref=iamhere" readonly>
+          <button class="btn btn-primary" id="copyLinkBtn">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-notification" id="toastNotification" style="display: none;">
+    <span class="toast-icon">✨</span>
+    <span class="toast-message" id="toastMessage">Action completed</span>
+  </div>
+
+  <!-- JAVASCRIPT APP -->
+  <script src="app.js"></script>
+</body>
+</html>
+
